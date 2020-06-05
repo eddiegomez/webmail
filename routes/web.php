@@ -19,13 +19,7 @@ Route::get('/frontOfice', function () {
     return view('template');
 });
 
-Route::get('/enviar', function(){
-    Mail::send('mail.corpo', ['curso' => 'Webmail'], function($m){
-        $m->from(Auth::user()->email, Auth::user()->name);
-        $m->subject('Teste de envio usando API mailgum');
-        $m->to('exemplo@gmail.com');
-    });
-});
+Route::apiResources(['enviar'=> 'API\EmailController']);
 
 Auth::routes();
 

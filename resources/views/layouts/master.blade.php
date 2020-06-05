@@ -67,7 +67,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" style="top:10px">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
+          <li id="active_first" class="nav-item">
             <router-link to="/caixa_de_entrada" class="nav-link">
               <i class="nav-icon fas fa-envelope"></i>
               <p>Caixa de entrada</p>
@@ -132,6 +132,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
               <form method="POST" action="/enviar" enctype="multipart/form-data">
+                @csrf
                 <div class="modal-body">
                 <div class="row">
                   <div class="col-sm-2">
@@ -161,9 +162,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="col-sm-10">
                     <div class="form-group">
                       <input
-                        placeholder="Destinatario"
-                        type="text"
-                        name="nome"
+                        placeholder="exemplo@inage.com"
+                        type="email"
+                        name="destinatario"
                         class="form-control"
                       />
                     </div>
@@ -202,7 +203,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <input
                         placeholder=""
                         type="text"
-                        name="nome"
+                        name="assunto"
                         class="form-control"
                       />
                     </div>
@@ -219,7 +220,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <textarea
                         rows="7"
                         type="text"
-                        name="nome"
+                        name="mensagem"
                         class="form-control"
                       ></textarea>
                     </div>
@@ -232,11 +233,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </button>
                 </div>-->
                 </div>
-              </form>
-            <div class="modal-footer">
+              <div class="modal-footer">
               <button type="button" class="btn btn-primary" >Guardar</button>
               <button type="submit" class="btn btn-success" >Enviar</button>
             </div>
+            </form>
           </div>
 
         </div>
@@ -277,7 +278,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </footer>
 </div>
 <!-- ./wrapper -->
-
+<script>
+  document.getElementById("active_first").class = "nav-link router-link-exact-active router-link-active";
+</script>
 <script src="/js/app.js"></script>
 </body>
 </html>
