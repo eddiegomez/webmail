@@ -36,12 +36,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4"  style="background-color:#051d39">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4"  style="background-color:black">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-      <img src="/imagens/gov.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+      <img src="/imagens/logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">Correio do Governo</span>
+      <span class="brand-text font-weight-light">MAR\E <strong style="color:red">S</strong>ex Shop</span>
     </a>
 
     <!-- Sidebar -->
@@ -69,8 +69,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                with font-awesome or any other icon font library -->
           <li id="active_first" class="nav-item">
             <router-link to="/caixa_de_entrada" class="nav-link">
-              <i class="nav-icon fas fa-envelope"></i>
-              <p>Caixa de entrada</p>
+              <i class="nav-icon fa fa-shopping-cart"></i>
+              <p>Artigos</p>
             </router-link>
           </li>
           <li class="nav-item">
@@ -124,7 +124,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Modal -->
       <div id="novoEmail" class="modal fade" role="dialog">
         <div class="modal-dialog">
-
           <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
@@ -239,7 +238,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
             </form>
           </div>
-
         </div>
       </div>
     <!-- End of modal -->
@@ -249,11 +247,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+    <div class="col-sm-4">    <router-view></router-view>
+      <button id="btn_email" class="btn btn-danger mb-10" data-toggle="modal" data-target="#novoEmail" style="position:fixed; bottom: 50px; right:50px;border-radius: 30px;">
+        <i class="fa fa-pen"></i> Escrever
+      </button>
+    </div>
     <router-view></router-view>
-    <button id="btn_email" class="btn btn-danger mb-10" data-toggle="modal" data-target="#novoEmail" style="position:fixed; bottom: 50px; right:50px;border-radius: 30px;">
-            <i class="fa fa-pen"></i> Escrever
-        </button>
-    
   </div>
   <!-- /.content-wrapper -->
 

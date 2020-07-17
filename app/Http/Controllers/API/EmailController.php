@@ -11,6 +11,10 @@ use Mail;
 
 class EmailController extends Controller
 {
+public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +33,7 @@ class EmailController extends Controller
      */
     public function store(Request $request)
     {
-        $email = new Email();
+        /*$email = new Email();
         $email->destinatario = $request->destinatario;
         $email->cc = $request->cc;
         $email->assunto = $request->assunto;
@@ -37,7 +41,9 @@ class EmailController extends Controller
         Mail::to($request->destinatario)
                 //->cc('muzonda99@gmail.com')
                 ->send(new SendMailUser($email));
-        return view('home');
+        return view('home');*/
+        return auth('api')->user()->id;
+
     }
 
     /**

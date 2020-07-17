@@ -21,7 +21,13 @@ import 'vue-good-table/dist/vue-good-table.css'
 Vue.use(VueGoodTablePlugin);
 
 let routes = [
-    { path: '/favicon.ico', component: require('./components/Caixa_de_entrada.vue').default },
+    { path: '/favicon.ico', component: require('./components/Caixa_de_entrada.vue').default, 
+        children: [
+            {
+                path: 'mostrar',
+                component: require('./components/Corpo.vue').default
+            }
+        ] },
     { path: '/caixa_de_entrada', component: require('./components/Caixa_de_entrada.vue').default },
     { path: '/enviadas', component: require('./components/Enviadas.vue').default },
     { path: '/rascunhos', component: require('./components/Rascunhos.vue').default },
