@@ -4,13 +4,13 @@
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
-<html lang="en">
+<html lang="en"> 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Correio</title>
+  <title>Marie Sex Shop</title>
   <meta name="csrf-token" content="{{csrf_token()}}">
   
   <link rel = "stylesheet" href = "/css/app.css">
@@ -68,46 +68,82 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li id="active_first" class="nav-item">
-            <router-link to="/caixa_de_entrada" class="nav-link">
-              <i class="nav-icon fa fa-shopping-cart"></i>
+            <router-link to="/dashboard" class="nav-link">
+              <i class="nav-icon fa fa-chart-pie"></i>
+              <p>Estatisticas</p>
+            </router-link>
+          </li>
+          <li id="active_first" class="nav-item">
+            <router-link to="/artigos" class="nav-link">
+              <i class="nav-icon fa fa-boxes"></i>
               <p>Artigos</p>
+              @if($min < 5)
+                <span class="right" style="float:right"><i class="nav-icon fas fa-bell" style="color:red"></i></span>
+              @endif
             </router-link>
           </li>
-          <li class="nav-item">
-            <router-link to="/enviadas" class="nav-link">
-              <i class="nav-icon fas fa-envelope"></i>
-              <p>Enviadas</p>
+          <li id="active_first" class="nav-item">
+            <router-link to="/blog" class="nav-link">
+              <i class="nav-icon fa fa-blog"></i>
+              <p>Blog</p>
             </router-link>
           </li>
-          <li class="nav-item">
-            <router-link to="/rascunhos" class="nav-link">
-              <i class="nav-icon fas fa-drafting-compass"></i>
-              <p>Rascunhos</p>
+          <li id="active_first" class="nav-item">
+          <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-dolly"></i>
+              <p>
+                Pedidos
+                <i class="right fa fa-angle-left"></i>
+              </p>
+            </a>
+
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <router-link to="/pedidos" class="nav-link">  
+                  <i class="nav-icon fas fa-dolly"></i>
+                  <p>Activos</p>
+                </router-link>
+              </li>
+            </ul>
+
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+              <router-link to="/pedidos_arquivados" class="nav-link">
+                  <i class="nav-icon fas fa-archive"></i>
+                  <p>Arquivados</p>
+                </router-link>
+              </li>
+            </ul>
+          </li>
+          <li id="active_first" class="nav-item">
+            <router-link to="/vendas" class="nav-link">
+              <i class="nav-icon fa fa-chart-line"></i>
+              <p>Vendas</p>
+            </router-link>
+          </li> 
+          <li id="active_first" class="nav-item">
+            <router-link to="/categorias" class="nav-link">
+              <i class="nav-icon fa fa-list-alt"></i>
+              <p>Categorias</p>
             </router-link>
           </li>
-          <li class="nav-item">
-            <router-link to="/arquivadas" class="nav-link">
-              <i class="nav-icon fas fa-inbox"></i>
-              <p>Arquivadas</p>
+          <li id="active_first" class="nav-item">
+            <router-link to="/pagina_inicial" class="nav-link">
+              <i class="nav-icon fa fa-cogs"></i>
+              <p>Página Inicial</p>
             </router-link>
           </li>
-          <li class="nav-item">
-            <router-link to="/apagadas" class="nav-link">
-              <i class="nav-icon fas fa-recycle"></i>
-              <p>Apagadas</p>
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/contactos" class="nav-link">
-              <i class="nav-icon fas fa-address-book"></i>
-              <p>Contactos</p>
+          <li id="active_first" class="nav-item">
+            <router-link to="/utilizadores" class="nav-link">
+              <i class="nav-icon fa fa-users"></i>
+              <p>Utilizadores</p>
             </router-link>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}"
                   onclick="event.preventDefault();
                   document.getElementById('logout-form').submit();">
-            <i class="nav-icon fas fa-power-off red"></i>
+            <i class="nav-icon fas fa-power-off" style="color:red"></i>
               <p>
                 Terminar sessão
               </p>
@@ -121,139 +157,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
       </nav>
       <!-- /.sidebar-menu -->
       <!-- Modal view -->
-      <!-- Modal -->
-      <div id="novoEmail" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Novo email</h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              </div>
-              <form method="POST" action="/enviar" enctype="multipart/form-data">
-                @csrf
-                <div class="modal-body">
-                <div class="row">
-                  <div class="col-sm-2">
-                    <div class="form-group">
-                      <label class="text-muted" style="float:right; margin-right: -25px">De:</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-10">
-                    <div class="form-group">
-                      <input
-                        placeholder="Nome"
-                        type="text"
-                        name="nome"
-                        value='{{Auth::user()->email}}'
-                        class="form-control"
-                        disabled
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-2">
-                    <div class="form-group">
-                      <label class="text-muted" style="float:right; margin-right: -25px">Para:</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-10">
-                    <div class="form-group">
-                      <input
-                        placeholder="exemplo@inage.com"
-                        type="email"
-                        name="destinatario"
-                        class="form-control"
-                      />
-                    </div>
-                  </div>
-                  </div>
-                <div class="row">
-                  <div class="col-sm-2">
-                    <div class="form-group">
-                      <label class="text-muted" style="float:right; margin-right: -25px">CC + </label>
-                    </div>
-                  </div>
-                  <div class="col-sm-9">
-                    <div class="form-group">
-                      <input
-                        placeholder="Destinatario"
-                        type="text"
-                        name="nome"
-                        class="form-control"
-                      />
-                    </div>
-                  </div>
-                  <div class="col-sm-1">
-                    <div class="form-group">
-                      <button type="button" class="btn btn-default" style="color:cian; margin-left:-28px"><i class="nav-icon fas fa-plus"></i></button>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-2">
-                    <div class="form-group">
-                      <label class="text-muted" style="float:right; margin-right: -25px">Assunto:</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-10">
-                    <div class="form-group">
-                      <input
-                        placeholder=""
-                        type="text"
-                        name="assunto"
-                        class="form-control"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-2">
-                    <div class="form-group">
-                      <label class="text-muted" style="float:right; margin-right: -25px">Mensagem:</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-10">
-                    <div class="form-group">
-                      <textarea
-                        rows="7"
-                        type="text"
-                        name="mensagem"
-                        class="form-control"
-                      ></textarea>
-                    </div>
-                  </div>
-                </div>
-                <!--<div class="col-md-3">
-                  <button class="btn btn-primary pull-left" id="btn_file">
-                    <span class="fa fa-paperclip fa-2x"></span>
-                    <input type="file" id="file" style="display: none;" />
-                  </button>
-                </div>-->
-                </div>
-              <div class="modal-footer">
-              <button type="button" class="btn btn-primary" >Guardar</button>
-              <button type="submit" class="btn btn-success" >Enviar</button>
-            </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    <!-- End of modal -->
+      
     </div>
     <!-- /.sidebar -->
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <div class="col-sm-4">    <router-view></router-view>
-      <button id="btn_email" class="btn btn-danger mb-10" data-toggle="modal" data-target="#novoEmail" style="position:fixed; bottom: 50px; right:50px;border-radius: 30px;">
-        <i class="fa fa-pen"></i> Escrever
-      </button>
-    </div>
+    
+    <div class="col-sm-12"  style="top: 20px">
     <router-view></router-view>
-  </div>
+    </div>
+    </div>
   <!-- /.content-wrapper -->
 
   <!-- Control Sidebar -->
@@ -273,7 +188,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       Anything you want
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2020 <a href="#">Correio do Governo</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; {{date('Y')}} <a style="color:red" href="#">Marie Sex Shop E.I.</a>.</strong> All rights reserved.
   </footer>
 </div>
 <!-- ./wrapper -->
